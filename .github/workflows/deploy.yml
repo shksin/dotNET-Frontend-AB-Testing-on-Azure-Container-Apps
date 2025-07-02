@@ -3,12 +3,12 @@ name: Build and deploy .NET application to Container App silo
 on:
   push:
     branches:
-    - deploy
+    - main
 
 env:
   
   # alphanumeric string under 14 characters
-  RESOURCE_GROUP_NAME: rrg-aca-featureflags
+  RESOURCE_GROUP_NAME: rg-aca-featureflags
 
   # specify your preferred region
   REGION: australiaeast
