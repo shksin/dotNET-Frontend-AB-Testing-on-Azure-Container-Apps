@@ -8,10 +8,10 @@ on:
 env:
   
   # alphanumeric string under 14 characters
-  RESOURCE_GROUP_NAME: featureflagsaca
+  RESOURCE_GROUP_NAME: rrg-aca-featureflags
 
   # specify your preferred region
-  REGION: eastus
+  REGION: australiaeast
 
   FRONTEND_DOCKER: FeatureFlagsWithContainerApps/Dockerfile
   FRONTEND_IMAGE: frontend
