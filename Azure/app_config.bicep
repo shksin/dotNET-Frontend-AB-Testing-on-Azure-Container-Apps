@@ -16,7 +16,7 @@ var featureFlagValue = {
   enabled: true
 }
 
-resource appConfig 'Microsoft.AppConfiguration/configurationStores@2021-10-01-preview' ={
+resource appConfig 'Microsoft.AppConfiguration/configurationStores@2024-05-01' ={
   location: location
   name: configStoreName
   sku: {
@@ -26,7 +26,7 @@ resource appConfig 'Microsoft.AppConfiguration/configurationStores@2021-10-01-pr
 
 var appConfigConnectionString = appConfig.listKeys().value[0].connectionString
 
-resource beta 'Microsoft.AppConfiguration/configurationStores/keyValues@2021-10-01-preview' ={
+resource beta 'Microsoft.AppConfiguration/configurationStores/keyValues@2024-05-01' ={
   parent: appConfig
   name: '.appconfig.featureflag~2F${featureFlagKey}$${featureFlagLabelEnabled}'
   properties: {
