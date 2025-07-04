@@ -23,15 +23,15 @@ jobs:
     steps:
 
     - name: Checkout to the branch
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Azure Login
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
         creds: ${{ secrets.AzureSPN }}
 
     - name: Create resource group
-      uses: azure/CLI@v1
+      uses: azure/CLI@v2
       with:
         inlineScript: >
           echo "Creating resource group in Azure"
@@ -40,7 +40,7 @@ jobs:
           az group create -l ${{ env.REGION }} -n ${{ env.RESOURCE_GROUP_NAME }}
 
     - name: Creating resources
-      uses: azure/CLI@v1
+      uses: azure/CLI@v2
       with:
         inlineScript: >
           echo "Creating resources"
@@ -54,15 +54,15 @@ jobs:
     steps:
 
     - name: Checkout to the branch
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Azure Login
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
         creds: ${{ secrets.AzureSPN }}
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      uses: docker/setup-buildx-action@v3
 
     - name: Login to ACR
       run: |
@@ -72,7 +72,7 @@ jobs:
         docker login -u 00000000-0000-0000-0000-000000000000 --password-stdin ${{ env.RESOURCE_GROUP_NAME }}acr.azurecr.io <<< "$refresh_token"
 
     - name: Build the frontend image and push it to ACR
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v5
       with:
         push: true
         tags: ${{ env.RESOURCE_GROUP_NAME }}acr.azurecr.io/${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
@@ -85,15 +85,15 @@ jobs:
     steps:
 
     - name: Checkout to the branch
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Azure Login
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
         creds: ${{ secrets.AzureSPN }}
 
     - name: Installing Container Apps extension
-      uses: azure/CLI@v1
+      uses: azure/CLI@v2
       with:
         inlineScript: >
           az config set extension.use_dynamic_install=yes_without_prompt
@@ -108,7 +108,7 @@ jobs:
         docker login -u 00000000-0000-0000-0000-000000000000 --password-stdin ${{ env.RESOURCE_GROUP_NAME }}acr.azurecr.io <<< "$refresh_token"
 
     - name: Deploy Container Apps
-      uses: azure/CLI@v1
+      uses: azure/CLI@v2
       with:
         inlineScript: >
           az containerapp registry set -n frontend -g ${{ env.RESOURCE_GROUP_NAME }} --server ${{ env.RESOURCE_GROUP_NAME }}acr.azurecr.io
