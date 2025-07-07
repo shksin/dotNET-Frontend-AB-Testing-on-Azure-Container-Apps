@@ -1,8 +1,12 @@
 using Microsoft.FeatureManagement;
+using Microsoft.ApplicationInsights;
+using System.Collections.Generic;
 
 var builder = WebApplication.CreateBuilder(args);
 
 string config = builder.Configuration.GetValue<string>("AzureAppConfig");
+var revisionLabel = builder.Configuration.GetValue<string>("RevisionLabel");
+
 builder.Configuration.AddAzureAppConfiguration(options =>
     options
         .Connect(config)
@@ -30,6 +34,10 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Log revision label to Application Insights
+var telemetryClient = app.Services.GetRequiredService<TelemetryClient>();
+telemetryClient.TrackEvent("RevisionLabel", new Dictionary<string, string> {{ "RevisionLabel", revisionLabel }});
 
 app.Run();
 

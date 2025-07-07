@@ -1,5 +1,5 @@
 param location string = resourceGroup().location
-param acrName string = 'acafeatureflagsacr0407'
+param acrName string = 'acafeatureflagsacr0707'
 
 // create the azure container registry
 resource acr 'Microsoft.ContainerRegistry/registries@2023-07-01' = {

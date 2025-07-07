@@ -8,8 +8,8 @@ on:
 env:
   
   # alphanumeric string under 14 characters
-  RESOURCE_GROUP_NAME: rg-aca-featureflags
-  ACR_NAME: acafeatureflagsacr0407
+  RESOURCE_GROUP_NAME: rg-aca-featureflags-0707
+  ACR_NAME: acafeatureflagsacr0707
 
   # specify your preferred region
   REGION: australiaeast
