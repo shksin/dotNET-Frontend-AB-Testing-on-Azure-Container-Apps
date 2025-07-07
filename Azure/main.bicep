@@ -51,7 +51,7 @@ var shared_config = [
   }
   {
     name: 'RevisionLabel'
-    value: 'BetaDisabled'
+    value: 'BetaEnabled'
   }
 ]
 
